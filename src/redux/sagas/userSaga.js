@@ -38,8 +38,6 @@ export function* adminLogin({ payload: { email, password } }) {
 
     } catch (error) {
         yield put(setState({
-            // errorOccurred: true,
-            // errorMessage: error.message,
             loading: false
         }))
 
@@ -87,8 +85,6 @@ export function* userLogin({ payload: { email, password } }) {
 
     } catch (error) {
         yield put(setState({
-            // errorOccurred: true,
-            // errorMessage: error.message,
             loading: false
         }))
 
@@ -123,10 +119,7 @@ export function* register({ payload: { firstName, lastName, gender, college, mob
 
     } catch (error) {
         yield put(setState({
-            // errorOccurred: true,
-            // errorMessage: error.message,
-            loading: false,
-            // registrationSuccess: false
+            loading: false
         }))
 
         yield toast(error.message, {
