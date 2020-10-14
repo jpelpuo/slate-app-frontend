@@ -1,6 +1,6 @@
 // import axios from 'axios';
 
-const url = 'https://intense-badlands-44228.herokuapp.com//api/user';
+const url = 'https://intense-badlands-44228.herokuapp.com/api/user';
 
 export const login = async (email, password) => {
     try {
