@@ -5,6 +5,7 @@ import LinkButton from '../components/LinkButton';
 import { register } from '../redux/actions/userActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { ToastContainer } from 'react-toastify'
 
 const { Row } = Form;
 
@@ -98,7 +99,7 @@ const StyledLoginButton = styled(Button)`
 `;
 
 
-const RegisterPage = ({ register, errorOccurred, errorMessage, loading, registrationSuccess }) => {
+const RegisterPage = ({ register, errorOccurred, errorMessage, loading }) => {
 
     const firstNameEl = useRef();
     const lastNameEl = useRef();
@@ -215,6 +216,16 @@ const RegisterPage = ({ register, errorOccurred, errorMessage, loading, registra
                     </FormRow>
                 </RegisterForm>
             </RegisterFormContainer>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </RegisterContainer>
     );
 }

@@ -5,7 +5,8 @@ import Webcam from 'react-webcam';
 import { connect } from 'react-redux';
 import { takePicture, savePicture } from '../redux/actions/userActions';
 import PropTypes from 'prop-types';
-import { FaCamera, FaSave } from 'react-icons/fa'
+import { FaCamera, FaSave } from 'react-icons/fa';
+import { ToastContainer } from 'react-toastify'
 
 
 const VideoImageWrapper = styled(Card)`
@@ -220,6 +221,16 @@ const PicturePage = ({ image, takePicture, savePicture, userName, imageSaved }) 
                     </StyledButton>
                 </ActionsWrapper>
             </MainMediaContainer>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </VideoImageWrapper>
     );
 }

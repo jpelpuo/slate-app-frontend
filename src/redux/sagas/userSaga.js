@@ -3,7 +3,8 @@ import { push } from 'connected-react-router';
 import { setState } from '../actions/userActions';
 import { login, registerUser, saveImage, getUserInfo } from '../../services/user';
 import { login as adminAuth } from '../../services/admin'
-import actions from '../actionTypes'
+import actions from '../actionTypes';
+import { toast } from 'react-toastify'
 
 
 // Admin Login Saga
@@ -37,10 +38,14 @@ export function* adminLogin({ payload: { email, password } }) {
 
     } catch (error) {
         yield put(setState({
-            errorOccurred: true,
-            errorMessage: error.message,
+            // errorOccurred: true,
+            // errorMessage: error.message,
             loading: false
         }))
+
+        yield toast(error.message, {
+            type: "error"
+        })
     }
 }
 
@@ -82,10 +87,14 @@ export function* userLogin({ payload: { email, password } }) {
 
     } catch (error) {
         yield put(setState({
-            errorOccurred: true,
-            errorMessage: error.message,
+            // errorOccurred: true,
+            // errorMessage: error.message,
             loading: false
         }))
+
+        yield toast(error.message, {
+            type: "error"
+        })
     }
 }
 
@@ -114,11 +123,15 @@ export function* register({ payload: { firstName, lastName, gender, college, mob
 
     } catch (error) {
         yield put(setState({
-            errorOccurred: true,
-            errorMessage: error.message,
+            // errorOccurred: true,
+            // errorMessage: error.message,
             loading: false,
-            registrationSuccess: false
+            // registrationSuccess: false
         }))
+
+        yield toast(error.message, {
+            type: "error"
+        })
     }
 }
 
@@ -142,23 +155,24 @@ export function* savePicture({ payload: { imageBase64, userName } }) {
 
         yield put(setState({
             loading: false,
-            imageSaved: true
         }))
+
+        yield toast("Imaged saved... Redirecting to login page", {
+            type: "success"
+        })
 
         yield delay(3000)
 
         yield put(push('/auth'))
-        yield put(setState({
-            imageSaved: false
-        }))
 
     } catch (error) {
         yield put(setState({
-            errorOccurred: true,
-            errorMessage: error.message,
             loading: false,
-            imageSaved: false
         }))
+
+        yield toast(error.message, {
+            type: "error"
+        })
     }
 }
 

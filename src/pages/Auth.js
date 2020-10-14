@@ -8,6 +8,7 @@ import {
     userLogin
 } from '../redux/actions/userActions';
 import PropTypes from 'prop-types';
+import { ToastContainer } from 'react-toastify'
 
 const { Row } = Form;
 
@@ -159,11 +160,11 @@ const AuthPage = ({ adminLogin, userLogin, loading, errorMessage, errorOccurred 
 
                     </Card.Subtitle>
                     <Form.Group controlId="email">
-                        <Form.Control type="email" ref={emailEl} placeholder="Email" required/>
+                        <Form.Control type="email" ref={emailEl} placeholder="Email" required />
                     </Form.Group>
 
                     <Form.Group controlId="password">
-                        <Form.Control type="password" ref={passwordEl} placeholder="Password" required/>
+                        <Form.Control type="password" ref={passwordEl} placeholder="Password" required />
                     </Form.Group>
                     <Form.Group controlId="adminCheck">
                         <Form.Check type="checkbox" label="Sign in as admin" ref={adminCheckEl} />
@@ -185,6 +186,16 @@ const AuthPage = ({ adminLogin, userLogin, loading, errorMessage, errorOccurred 
                     </FormRow>
                 </AuthForm>
             </AuthFormContainer>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </AuthContainer>
     );
 }
