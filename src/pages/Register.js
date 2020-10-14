@@ -6,7 +6,7 @@ import { register } from '../redux/actions/userActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const { Text, Row, Label } = Form;
+const { Row } = Form;
 
 
 const RegisterContainer = styled(Card)`
