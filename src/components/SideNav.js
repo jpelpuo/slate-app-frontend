@@ -1,0 +1,157 @@
+import React from 'react';
+import styled from 'styled-components';
+import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { toggleNav } from '../redux/actions/appActions';
+import { FaHome, FaGraduationCap, FaEdit } from 'react-icons/fa'
+
+const SideNavContainer = styled.div`
+    width: 15%;
+    height: 100%;
+    border-right: 1px solid lightgray;
+    position: fixed;
+    left: 0;
+    display: flex;
+    padding-top: 2.6rem;
+    background-color: white;
+    // opacity: 1;
+    
+`;
+
+const StyledNav = styled(Nav)`
+    width: 100%;
+
+    a.active {
+        color: gray;
+        border-right: 4px solid black;
+        background-color: lightgray;
+    }
+`;
+
+const StyledNavLink = styled(NavLink)`
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    padding: 0.9rem;
+    color: gray;
+    transition: all 0.2s;
+
+    &:hover{
+        text-decoration: none;
+        color: black;
+        background-color: white;
+        border-right: 4px solid black;
+    }
+`;
+
+const DropdownNav = styled.div`
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    transition: all 0.2s;
+    background-color: darkorange;
+`;
+
+const NavButton = styled.div`
+    width: 100%;
+    text-align: left;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    color: gray;
+    padding: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover{
+        background-color: white;
+        color: black;
+    }
+
+    & + ${DropdownNav}{
+        height: ${props => (props.navButtonClicked && props.Id === props.navId) ? "6.6rem" : "0px"};
+    }
+`;
+
+const NavText = styled.span`
+    vertical-align: -2px;
+`;
+
+
+const SideNav = ({ navButtonClicked, toggleNav, navId, navOpen }) => {
+    const handleToggleNav = (id) => {
+        if (id !== navId) {
+            toggleNav({
+                navButtonClicked: true,
+                navId: id
+            })
+            return;
+        }
+
+        toggleNav({
+            navButtonClicked: !navButtonClicked,
+            navId: id
+        })
+    }
+
+    return (
+        <SideNavContainer>
+            <StyledNav className="flex-column">
+                <StyledNavLink to="/admin/home" className="">
+                    <FaHome />
+                    <NavText className="ml-1" style={{ verticalAlign: "-2px" }}>
+                        Home
+                    </NavText>
+                </StyledNavLink>
+                <NavButton
+                    onClick={(e) => handleToggleNav('course')}
+                    Id="course"
+                    navButtonClicked={navButtonClicked}
+                    navId={navId}
+                    navOpen={navOpen}
+                >
+                    <FaGraduationCap />
+                    <NavText className="ml-1" style={{ verticalAlign: "-2px" }}>
+                        Course
+                    </NavText>
+                </NavButton>
+                <DropdownNav className="" navId="course" >
+                <StyledNavLink to="/admin/courses">
+                        All Courses
+                    </StyledNavLink>
+                    <StyledNavLink to="/admin/add/course">
+                        Add Course
+                    </StyledNavLink>
+                </DropdownNav>
+                <NavButton
+                    onClick={(e) => handleToggleNav('exams')}
+                    Id="exams"
+                    navButtonClicked={navButtonClicked}
+                    navId={navId}
+                    navOpen={navOpen}
+                >
+                    <FaEdit/>
+                    <NavText className="ml-1">
+                        Exams
+                    </NavText>
+                </NavButton>
+                <DropdownNav className="" navId="exams" >
+                    <StyledNavLink to="/admin/home/add/test">
+                        Add Test
+                    </StyledNavLink>
+                </DropdownNav>
+            </StyledNav>
+        </SideNavContainer>
+    );
+}
+
+const select = state => {
+    return {
+        navButtonClicked: state.app.navButtonClicked,
+        navId: state.app.navId,
+        navOpen: state.app.navOpen
+    }
+}
+
+export default connect(select, { toggleNav })(SideNav);
