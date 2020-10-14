@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { Form, Button, Alert, Spinner, Card } from 'react-bootstrap';
+import { Form, Button, Spinner, Card } from 'react-bootstrap';
 import LinkButton from '../components/LinkButton';
 import { connect } from 'react-redux';
 import {
@@ -9,7 +9,7 @@ import {
 } from '../redux/actions/userActions';
 import PropTypes from 'prop-types';
 
-const { Text, Row, Label } = Form;
+const { Row } = Form;
 
 
 const AuthContainer = styled(Card)`

@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 const url = 'https://intense-badlands-44228.herokuapp.com//api/user';
 

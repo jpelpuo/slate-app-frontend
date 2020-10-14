@@ -6,7 +6,6 @@ import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router'
 import sagas from './redux/sagas';
 import { setState } from './redux/actions/userActions'
-import { dropNav } from './redux/actions/appActions'
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -26,7 +25,6 @@ const store = createStore(
     )
 );
 
-const { loaction } = history;
 
 history.listen(() => {
     store.dispatch(setState({
