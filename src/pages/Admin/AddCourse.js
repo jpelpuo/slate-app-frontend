@@ -33,13 +33,6 @@ const SubtitleText = styled.h4`
     text-align: left;
 `;
 
-const Toasts = styled.div`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 2rem;
-`;
-
 const AddCoursePage = ({ loading, addCourse }) => {
 
     const courseNameEl = useRef();
