@@ -170,33 +170,33 @@ const RegisterPage = ({ register, errorOccurred, errorMessage, loading, registra
                         }
                     </Card.Subtitle>
                     <Form.Group controlId="firstName">
-                        <Form.Control type="text" ref={firstNameEl} placeholder="First Name" />
+                        <Form.Control type="text" ref={firstNameEl} placeholder="First Name" required />
                     </Form.Group>
                     <Form.Group controlId="lastName">
-                        <Form.Control type="text" ref={lastNameEl} placeholder="Last Name" />
+                        <Form.Control type="text" ref={lastNameEl} placeholder="Last Name" required />
                     </Form.Group>
                     <Form.Group controlId="gender">
-                        <Form.Control as="select" ref={genderEl} defaultValue="Gender">
+                        <Form.Control as="select" ref={genderEl} defaultValue="Gender" required>
                             <option disabled>Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="college">
-                        <Form.Control type="text" ref={collegeEl} placeholder="College" />
+                        <Form.Control type="text" ref={collegeEl} placeholder="College" required />
                     </Form.Group>
                     <Form.Group controlId="mobile">
-                        <Form.Control type="tel" ref={mobileEl} placeholder="Mobile Number" />
+                        <Form.Control type="tel" ref={mobileEl} placeholder="Mobile Number" required />
                     </Form.Group>
                     <Form.Group controlId="email">
-                        <Form.Control type="email" ref={emailEl} placeholder="Email" />
+                        <Form.Control type="email" ref={emailEl} placeholder="Email" required />
                     </Form.Group>
 
                     <Form.Group controlId="password">
-                        <Form.Control type="password" ref={passwordEl} placeholder="Password" />
+                        <Form.Control type="password" ref={passwordEl} placeholder="Password" required />
                     </Form.Group>
                     <Form.Group controlId="confirmPassword">
-                        <Form.Control type="password" ref={confirmPasswordEl} placeholder="Confirm Password" />
+                        <Form.Control type="password" ref={confirmPasswordEl} placeholder="Confirm Password" required />
                     </Form.Group>
                     <FormRow>
                         <StyledLoginButton type="submit">
@@ -221,10 +221,10 @@ const RegisterPage = ({ register, errorOccurred, errorMessage, loading, registra
 
 const select = state => {
     return {
-        errorOccurred: state.user.errorOccurred,
-        errorMessage: state.user.errorMessage,
-        loading: state.user.loading,
-        registrationSuccess: state.user.registrationSuccess
+        errorOccurred: state.app.errorOccurred,
+        errorMessage: state.app.errorMessage,
+        loading: state.app.loading,
+        registrationSuccess: state.app.registrationSuccess
     }
 }
 

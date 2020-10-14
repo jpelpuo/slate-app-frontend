@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FaGraduationCap, FaPlus } from 'react-icons/fa';
-import { Form, Jumbotron, Button } from 'react-bootstrap';
+import { Form, Jumbotron, Button, Spinner } from 'react-bootstrap';
+import { addCourse } from '../../redux/actions/courseActions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { ToastContainer } from 'react-toastify'
 
 const AddCourseContainer = styled.div`
     display: flex;
@@ -29,8 +33,34 @@ const SubtitleText = styled.h4`
     text-align: left;
 `;
 
+const Toasts = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2rem;
+`;
 
-const AddCoursePage = () => {
+const AddCoursePage = ({ loading, addCourse }) => {
+
+    const courseNameEl = useRef();
+    const subjectEl = useRef();
+    const descriptionEl = useRef();
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const courseName = courseNameEl.current.value.trim()
+        const subject = subjectEl.current.value.trim()
+        const description = descriptionEl.current.value.trim();
+
+        const payload = {
+            courseName,
+            subject,
+            description
+        }
+
+        addCourse(payload)
+    }
+
     return (
         <AddCourseContainer>
             <Header fluid>
@@ -43,27 +73,51 @@ const AddCoursePage = () => {
                     Enter course details
                 </SubtitleText>
             </Subtitle>
-            <Form>
-                <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Control type="text" placeholder="Course name" required/>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="">
+                    <Form.Control type="text" placeholder="Course name" required ref={courseNameEl} />
                 </Form.Group>
 
-                <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Control type="text" placeholder="Subject" required/>
+                <Form.Group controlId="">
+                    <Form.Control type="text" placeholder="Subject" required ref={subjectEl} />
                 </Form.Group>
 
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Control as="textarea" rows="8" placeholder="Course description" required/>
+                <Form.Group controlId="">
+                    <Form.Control as="textarea" rows="8" placeholder="Course description" required ref={descriptionEl} />
                 </Form.Group>
                 <Form.Group>
-                    <Form.File id="exampleFormControlFile1" />
+                    <Form.File id="" />
                 </Form.Group>
                 <Button variant="primary" type="submit" className="float-left">
-                    <FaPlus/> Add course
+                    {
+                        loading
+                            ? <Spinner animation="border" size="sm" as="span" />
+                            : <FaPlus />
+                    } Add course
                 </Button>
             </Form>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </AddCourseContainer>
     );
 }
 
-export default AddCoursePage;
+const select = state => {
+    return {
+        loading: state.app.loading
+    }
+}
+
+AddCoursePage.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    addCourse: PropTypes.func.isRequired
+}
+export default connect(select, { addCourse })(AddCoursePage);

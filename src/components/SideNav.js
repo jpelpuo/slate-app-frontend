@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleNav } from '../redux/actions/appActions';
-import { FaHome, FaGraduationCap, FaEdit } from 'react-icons/fa'
+import { FaHome, FaGraduationCap, FaEdit, FaCaretDown } from 'react-icons/fa'
 
 const SideNavContainer = styled.div`
     width: 15%;
@@ -14,18 +14,16 @@ const SideNavContainer = styled.div`
     left: 0;
     display: flex;
     padding-top: 2.6rem;
-    background-color: white;
-    // opacity: 1;
-    
+    background-color: white;    
 `;
 
 const StyledNav = styled(Nav)`
     width: 100%;
 
     a.active {
-        color: gray;
+        color: white;
         border-right: 4px solid black;
-        background-color: lightgray;
+        background-color: darkorange;
     }
 `;
 
@@ -50,7 +48,7 @@ const DropdownNav = styled.div`
     flex-flow: column nowrap;
     overflow: hidden;
     transition: all 0.2s;
-    background-color: darkorange;
+    background-color: lightgray;
 `;
 
 const NavButton = styled.div`
@@ -115,13 +113,20 @@ const SideNav = ({ navButtonClicked, toggleNav, navId, navOpen }) => {
                     <NavText className="ml-1" style={{ verticalAlign: "-2px" }}>
                         Course
                     </NavText>
+                    <span className="float-right">
+                        <FaCaretDown />
+                    </span>
                 </NavButton>
                 <DropdownNav className="" navId="course" >
-                <StyledNavLink to="/admin/courses">
-                        All Courses
+                    <StyledNavLink to="/admin/courses">
+                        <span className="pl-3">
+                            All Courses
+                        </span>
                     </StyledNavLink>
                     <StyledNavLink to="/admin/add/course">
-                        Add Course
+                        <span className="pl-3">
+                            Add Course
+                        </span>
                     </StyledNavLink>
                 </DropdownNav>
                 <NavButton
@@ -131,14 +136,19 @@ const SideNav = ({ navButtonClicked, toggleNav, navId, navOpen }) => {
                     navId={navId}
                     navOpen={navOpen}
                 >
-                    <FaEdit/>
+                    <FaEdit />
                     <NavText className="ml-1">
                         Exams
                     </NavText>
+                    <span className="float-right">
+                        <FaCaretDown />
+                    </span>
                 </NavButton>
                 <DropdownNav className="" navId="exams" >
                     <StyledNavLink to="/admin/home/add/test">
-                        Add Test
+                        <span className="pl-3">
+                            Add Test
+                        </span>
                     </StyledNavLink>
                 </DropdownNav>
             </StyledNav>

@@ -159,11 +159,11 @@ const AuthPage = ({ adminLogin, userLogin, loading, errorMessage, errorOccurred 
 
                     </Card.Subtitle>
                     <Form.Group controlId="email">
-                        <Form.Control type="email" ref={emailEl} placeholder="Email" />
+                        <Form.Control type="email" ref={emailEl} placeholder="Email" required/>
                     </Form.Group>
 
                     <Form.Group controlId="password">
-                        <Form.Control type="password" ref={passwordEl} placeholder="Password" />
+                        <Form.Control type="password" ref={passwordEl} placeholder="Password" required/>
                     </Form.Group>
                     <Form.Group controlId="adminCheck">
                         <Form.Check type="checkbox" label="Sign in as admin" ref={adminCheckEl} />
@@ -191,9 +191,9 @@ const AuthPage = ({ adminLogin, userLogin, loading, errorMessage, errorOccurred 
 
 const select = state => {
     return {
-        errorOccurred: state.user.errorOccurred,
-        errorMessage: state.user.errorMessage,
-        loading: state.user.loading
+        errorOccurred: state.app.errorOccurred,
+        errorMessage: state.app.errorMessage,
+        loading: state.app.loading
     }
 }
 

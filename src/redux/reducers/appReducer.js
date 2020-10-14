@@ -3,7 +3,10 @@ import actions from "../actionTypes";
 const initialState = {
     navButtonClicked: false,
     navId: "",
-    navOpen: false
+    navOpen: false,
+    loading: false,
+    errorOccurred: false,
+    errorMessage: "",
 }
 
 const appReducer = (state = initialState, action) => {

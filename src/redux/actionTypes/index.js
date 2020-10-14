@@ -11,7 +11,12 @@ const actions = {
 
     // App actions
     SET_STATE: "SET_STATE",
-    TOGGLE_NAV: "TOGGLE_NAV"
+    TOGGLE_NAV: "TOGGLE_NAV",
+
+    // Course actions
+    ADD_COURSE: "admin/ADD_COURSE",
+    REGISTER_COURSE: "user/REGISTER_COURSE"
+
 }
 
 

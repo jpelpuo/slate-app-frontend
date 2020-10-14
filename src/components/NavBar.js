@@ -26,6 +26,10 @@ const StyledNavLink = styled(NavLink)`
         color: orange;
         text-decoration: none;
     }
+
+    @media screen and (max-width: 990px){
+        margin: 1rem !important;
+    }
 `;
 
 const NavText = styled.span`
@@ -34,12 +38,13 @@ const NavText = styled.span`
 `;
 
 const NavButton = styled(Button)`
-    color: gray;
-    background-color: inherit !important;
-    border-color: gray !important;
+    color: white;
+    background-color: red !important;
+    border-color: red !important;
 
     &:hover{
         background-color: orange !important;
+        border-color: orange !important;
     }
 `;
 
@@ -63,19 +68,19 @@ const NavBar = ({ logout, role, firstName, lastName }) => {
                                 <FaHome />
                                 <NavText>
                                     Home
-                        </NavText>
+                                </NavText>
                             </StyledNavLink>
                             <StyledNavLink to='/user/courses'>
                                 <FaGraduationCap />
                                 <NavText >
                                     Courses
-                        </NavText>
+                                </NavText>
                             </StyledNavLink>
                             <StyledNavLink to='/user/exams'>
                                 <FaEdit />
                                 <NavText>
                                     Exams
-                        </NavText>
+                                </NavText>
                             </StyledNavLink>
                             <StyledNavLink to='/user/ranking'>
                                 <FaChartBar />
