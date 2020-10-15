@@ -2,7 +2,7 @@ import actions from "../actionTypes";
 
 const initialState = {
     courseAdded: false,
-    course: [],
+    courses: [],
     courseDeleted: false
 }
 

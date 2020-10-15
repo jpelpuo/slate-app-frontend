@@ -16,7 +16,7 @@ const actions = {
     // Course actions
     ADD_COURSE: "admin/ADD_COURSE",
     REGISTER_COURSE: "user/REGISTER_COURSE",
-    GET_COURSES: "admin/GET_COURSES",
+    GET_COURSES: "GET_COURSES",
     SET_COURSES: "admin/SET_COURSES",
     DELETE_COURSE: "admin/DELETE_COURSE"
 }

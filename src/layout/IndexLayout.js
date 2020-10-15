@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const MainContainer = styled(Container)`
     padding: 0;
@@ -23,6 +24,10 @@ const IndexLayout = ({ children }) => {
             </Content>
         </MainContainer>
     );
+}
+
+IndexLayout.propTypes = {
+    children: PropTypes.object.isRequired
 }
 
 export default IndexLayout;

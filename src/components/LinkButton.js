@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const StyledLinkButton = styled(Link)`
     width: 40%;
@@ -23,6 +24,11 @@ const LinkButton = ({ children, to }) => {
             {children}
         </StyledLinkButton>
     );
+}
+
+LinkButton.propTypes = {
+    children: PropTypes.object.isRequired,
+    to: PropTypes.string.isRequired
 }
 
 export default LinkButton;

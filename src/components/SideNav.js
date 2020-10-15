@@ -4,7 +4,8 @@ import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleNav } from '../redux/actions/appActions';
-import { FaHome, FaGraduationCap, FaEdit, FaCaretDown } from 'react-icons/fa'
+import { FaHome, FaGraduationCap, FaEdit, FaCaretDown } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const SideNavContainer = styled.div`
     width: 15%;
@@ -162,6 +163,13 @@ const select = state => {
         navId: state.app.navId,
         navOpen: state.app.navOpen
     }
+}
+
+SideNav.propTypes = {
+    navButtonClicked: PropTypes.bool.isRequired,
+    navId: PropTypes.string.isRequired,
+    navOpen: PropTypes.bool.isRequired,
+    toggleNav: PropTypes.func.isRequired
 }
 
 export default connect(select, { toggleNav })(SideNav);

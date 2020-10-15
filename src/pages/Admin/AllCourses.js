@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { getCourses, deleteCourse } from '../../redux/actions/courseActions';
 import { ToastContainer } from 'react-toastify';
 import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 
 const CoursesContainer = styled.div`
@@ -37,11 +38,7 @@ const customStyles = {
             color: 'black',
             backgroundColor: 'darkorange',
             transitionDuration: '0.2s',
-            transitionProperty: 'background-color',
-            // borderBottomColor: 'black',
-            // outlineStyle: 'solid',
-            // outlineWidth: '1px',
-            // outlineColor: 'gray',
+            transitionProperty: 'background-color'
         }
     },
     highlightOnHoverStyle: {
@@ -135,6 +132,13 @@ const select = state => {
         courses: state.course.courses,
         courseDeleted: state.course.courseDeleted
     }
+}
+
+AllCoursesPage.propTypes = {
+    courses: PropTypes.array.isRequired,
+    courseDeleted: PropTypes.bool.isRequired,
+    getCourses: PropTypes.func.isRequired,
+    deleteCourse: PropTypes.func.isRequired
 }
 
 export default connect(select, { getCourses, deleteCourse })(AllCoursesPage);

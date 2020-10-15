@@ -88,4 +88,5 @@ AddCoursePage.propTypes = {
     loading: PropTypes.bool.isRequired,
     addCourse: PropTypes.func.isRequired
 }
+
 export default connect(select, { addCourse })(AddCoursePage);
