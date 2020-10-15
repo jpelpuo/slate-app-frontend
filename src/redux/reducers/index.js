@@ -5,8 +5,8 @@ import { connectRouter } from 'connected-react-router';
 import courseReducer from './courseReducer';
 
 const reducers = history => combineReducers({
-    user: userReducer,
     router: connectRouter(history),
+    user: userReducer,
     app: appReducer,
     course: courseReducer
 });

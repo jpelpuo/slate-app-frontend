@@ -24,10 +24,15 @@ const Content = styled.div`
 `;
 
 const MainContent = styled.div`
-    width: 80%;
+    display: flex;
+    width: ${props => props.role === 'admin' ? "80%" : "100%"};;
     flex-direction: column;
-    margin-left: 15%;
+    margin-left: ${props => props.role === 'admin' ? "15%" : ""};
     margin-top: 3rem;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
 `;
 
 const MainLayout = ({ children, role }) => {
@@ -38,7 +43,7 @@ const MainLayout = ({ children, role }) => {
                 {
                     role === 'admin' && <SideNav />
                 }
-                <MainContent>
+                <MainContent role={role} className="">
                     {children}
                 </MainContent>
             </Content>

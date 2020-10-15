@@ -5,33 +5,16 @@ import { Form, Jumbotron, Button, Spinner } from 'react-bootstrap';
 import { addCourse } from '../../redux/actions/courseActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
+import Header from '../../components/Header';
+import Subtitle from '../../components/Subtitle'
 
 const AddCourseContainer = styled.div`
     display: flex;
     width: 100%;
     flex-direction: column;
-`
-
-const Header = styled(Jumbotron)`
-    padding: 1.4rem;
-    border-radius: 0.5rem;
 `;
 
-const HeaderText = styled.h2`
-    color: gray;
-    font-weight: bolder;
-    text-align: left;
-`;
-
-const Subtitle = styled.div`
-    padding: 0.2rem 0.3rem;
-`;
-
-const SubtitleText = styled.h4`
-    font-weight: bolder;
-    text-align: left;
-`;
 
 const AddCoursePage = ({ loading, addCourse }) => {
 
@@ -56,16 +39,8 @@ const AddCoursePage = ({ loading, addCourse }) => {
 
     return (
         <AddCourseContainer>
-            <Header fluid>
-                <HeaderText>
-                    <FaGraduationCap /> <span>Add Course</span>
-                </HeaderText>
-            </Header>
-            <Subtitle>
-                <SubtitleText className="text-muted">
-                    Enter course details
-                </SubtitleText>
-            </Subtitle>
+            <Header icon={<FaGraduationCap />} headerText="Add Course" />
+            <Subtitle text="Enter course details" />
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="">
                     <Form.Control type="text" placeholder="Course name" required ref={courseNameEl} />

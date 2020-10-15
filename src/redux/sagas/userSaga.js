@@ -82,6 +82,9 @@ export function* userLogin({ payload: { email, password } }) {
         sessionStorage.setItem('accessToken', response.authData.accessToken)
         sessionStorage.setItem('authenticated', true)
         sessionStorage.setItem('role', 'user')
+        sessionStorage.setItem('firstName', userInfoResponse.userInfo.firstName)
+        sessionStorage.setItem('lastName', userInfoResponse.userInfo.lastName)
+        sessionStorage.setItem('registeredCourses', userInfoResponse.userInfo.registeredCourses)
 
     } catch (error) {
         yield put(setState({
@@ -182,7 +185,9 @@ export function* logout() {
     }))
 
     sessionStorage.setItem('accessToken', '');
-    sessionStorage.setItem('authenticated', false)
+    sessionStorage.setItem('authenticated', false);
+    sessionStorage.setItem('navButtonClicked', false)
+    sessionStorage.setItem('navId', '')
 
     yield put(push('/auth'))
 }

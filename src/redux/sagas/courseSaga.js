@@ -1,8 +1,14 @@
-import { takeEvery, put, all, call } from 'redux-saga/effects';
+import { takeEvery, put, all, call, delay } from 'redux-saga/effects';
 import actions from '../actionTypes';
-import { setState } from '../actions/courseActions';
-import { addCourse as addNewCourse } from '../../services/course';
-import { toast } from 'react-toastify'
+import { setCourses, setState } from '../actions/courseActions';
+import {
+    addCourse as addNewCourse,
+    getCourses as getAllCourses,
+    deleteOneCourse
+} from '../../services/course';
+import { toast } from 'react-toastify';
+
+const accessToken = sessionStorage.getItem('accessToken')
 
 export function* addCourse({ payload: { courseName, subject, description } }) {
     try {
@@ -10,12 +16,7 @@ export function* addCourse({ payload: { courseName, subject, description } }) {
             loading: true
         }))
 
-        console.log(courseName)
-        const accessToken = sessionStorage.getItem('accessToken')
-
         const response = yield call(addNewCourse, courseName, subject, description, accessToken);
-
-        console.log(response)
 
         if (response.error) {
             throw response.error;
@@ -40,8 +41,58 @@ export function* addCourse({ payload: { courseName, subject, description } }) {
     }
 }
 
+export function* getCourses() {
+    try {
+        const response = yield call(getAllCourses, accessToken);
+
+        if (response.error) {
+            throw response.error;
+        }
+
+        yield put(setCourses({
+            courses: [...response.courses]
+        }))
+
+    } catch (error) {
+        toast(error.message, {
+            type: "error"
+        })
+    }
+}
+
+export function* deleteCourse({ payload: { courseId } }) {
+    try {
+        const response = yield call(deleteOneCourse, courseId, accessToken);
+
+        if (response.error) {
+            throw response.error;
+        }
+
+        yield put(setState({
+            courseDeleted: true
+        }))
+
+        yield delay(3000)
+
+        toast("Course deleted", {
+            type: "success"
+        })
+
+        yield put(setState({
+            courseDeleted: false
+        }))
+
+    } catch (error) {
+        toast(error.message, {
+            type: "error"
+        })
+    }
+}
+
 export default function* rootSaga() {
     yield all([
-        takeEvery(actions.ADD_COURSE, addCourse)
+        takeEvery(actions.ADD_COURSE, addCourse),
+        takeEvery(actions.GET_COURSES, getCourses),
+        takeEvery(actions.DELETE_COURSE, deleteCourse)
     ])
 }

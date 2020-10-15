@@ -20,3 +20,34 @@ export const addCourse = async (courseName, subject, description, accessToken) =
         throw error;
     }
 }
+
+export const getCourses = async (accessToken) => {
+    try {
+        const response = await fetch(`${url}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+
+        return await response.json();
+    } catch (error) {
+        throw error
+    }
+}
+
+export const deleteOneCourse = async (courseId, accessToken) => {
+    try {
+        const response = await fetch(`${url}/delete/${courseId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        return await response.json()
+    } catch (error) {
+        throw error
+    }
+}

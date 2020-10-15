@@ -2,15 +2,15 @@ import actions from "../actionTypes";
 
 const initialState = {
     accessToken: sessionStorage.getItem('accessToken'),
-    firstName: "",
-    lastName: "",
+    firstName: sessionStorage.getItem('firstName'),
+    lastName: sessionStorage.getItem('lastName'),
     role: sessionStorage.getItem('role'),
     authenticated: sessionStorage.getItem('authenticated'),
     registrationSuccess: false,
     image: "",
     imageSaved: false,
     userName: "",
-    registeredCourses: [],
+    registeredCourses: [] || sessionStorage.getItem('registeredCourses'),
     email: ""
 }
 
