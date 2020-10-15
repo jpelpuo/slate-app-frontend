@@ -1,8 +1,8 @@
 import actions from "../actionTypes";
 
 const initialState = {
-    navButtonClicked: false,
-    navId: "",
+    navButtonClicked: false || sessionStorage.getItem('navButtonClicked'),
+    navId: "" || sessionStorage.getItem('navId'),
     navOpen: false,
     loading: false,
     errorOccurred: false,

@@ -6,6 +6,9 @@ export function* toggleNavigation({ payload }) {
     yield put(setState({
         ...payload
     }))
+
+    sessionStorage.setItem('navId', payload.navId)
+    sessionStorage.setItem('navButtonClicked', payload.navButtonClicked)
 }
 
 export default function* rootSaga() {

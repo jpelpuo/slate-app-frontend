@@ -13,6 +13,7 @@ import PicturePage from './pages/Picture';
 import { connect } from 'react-redux';
 import AdminHomePage from './pages/Admin/Home';
 import AddCoursePage from './pages/Admin/AddCourse';
+import AllCoursesPage from './pages/Admin/AllCourses'
 
 const userRoutes = [
     {
@@ -63,6 +64,11 @@ const mainAppRoutes = [
         path: "/admin/add/course",
         exact: true,
         component: <AddCoursePage />
+    },
+    {
+        path: "/admin/courses",
+        exact: true,
+        component: <AllCoursesPage />
     },
 ]
 
