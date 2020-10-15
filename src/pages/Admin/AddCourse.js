@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FaGraduationCap, FaPlus } from 'react-icons/fa';
-import { Form, Jumbotron, Button, Spinner } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import { addCourse } from '../../redux/actions/courseActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

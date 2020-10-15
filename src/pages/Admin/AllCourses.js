@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { FaGraduationCap, FaTrash, FaEdit } from 'react-icons/fa';
+import { FaGraduationCap, FaTrash } from 'react-icons/fa';
 import DataTable from 'react-data-table-component';
 import Header from '../../components/Header';
 import Subtitle from '../../components/Subtitle';
