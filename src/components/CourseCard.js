@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import generateRandomInt from '../helpers/generateRandomInt';
 import { FaLeanpub } from 'react-icons/fa';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { registerCourse } from '../redux/actions/courseActions';
 
 const colors = ["orange", "darkorange", "aqua", "lightblue"]
 
@@ -12,6 +14,7 @@ const StyledCard = styled(Card)`
     display: flex;
     margin-bottom: 1.5rem;
     transition: 0.2s all;
+    // height: 10rem;
 
     &:hover{
         transform: scale(1.05);
@@ -52,7 +55,13 @@ const Description = styled.div`
 `;
 
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, registerCourse }) => {
+
+    const handleRegister = courseId => {
+        registerCourse({
+            courseId
+        })
+    }
     return (
         <StyledCard>
             <CardHeader>
@@ -70,7 +79,9 @@ const CourseCard = ({ course }) => {
                     {course.description}
                 </Description>
                 <Actions className="">
-                    <RegisterButton className="mr-2">
+                    <RegisterButton
+                        className="mr-2"
+                        onClick={() => handleRegister(course._id)}>
                         Register
                     </RegisterButton>
                     <MoreButton>
@@ -82,8 +93,14 @@ const CourseCard = ({ course }) => {
     );
 }
 
+const select = state => {
+    return {
+
+    }
+}
+
 CourseCard.propTypes = {
     course: PropTypes.object.isRequired
 }
 
-export default CourseCard;
+export default connect(select, { registerCourse })(CourseCard);
