@@ -72,11 +72,11 @@ export function* deleteCourse({ payload: { courseId } }) {
             courseDeleted: true
         }))
 
-        yield delay(3000)
-
         toast("Course deleted", {
             type: "success"
         })
+
+        yield delay(3000)
 
         yield put(setState({
             courseDeleted: false
