@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-<<<<<<< HEAD
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-// import { ToastContainer } from 'react-toastify';
-=======
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
->>>>>>> exams
 import Header from '../../components/Header';
 import Subtitle from '../../components/Subtitle';
 import { FaEdit } from 'react-icons/fa';
