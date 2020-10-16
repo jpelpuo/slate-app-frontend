@@ -53,7 +53,7 @@ const AddExamPage = () => {
                 {
                     questions.map((question, index) => {
                         return (
-                            <QuestionContainer key={question} id={}>
+                            <QuestionContainer key={question} id={index}>
                                 <Form.Group>
                                     <Form.Control type="text" placeholder="Question" />
                                 </Form.Group>
