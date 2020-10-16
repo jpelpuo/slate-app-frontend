@@ -97,12 +97,12 @@ const SideNav = ({ navButtonClicked, toggleNav, navId, navOpen }) => {
     return (
         <SideNavContainer>
             <StyledNav className="flex-column">
-                <StyledNavLink to="/admin/home" className="">
+                {/* <StyledNavLink to="/admin/home" className="">
                     <FaHome />
                     <NavText className="ml-1" style={{ verticalAlign: "-2px" }}>
                         Home
                     </NavText>
-                </StyledNavLink>
+                </StyledNavLink> */}
                 <NavButton
                     onClick={(e) => handleToggleNav('course')}
                     Id="course"
@@ -146,9 +146,9 @@ const SideNav = ({ navButtonClicked, toggleNav, navId, navOpen }) => {
                     </span>
                 </NavButton>
                 <DropdownNav className="" navId="exams" >
-                    <StyledNavLink to="/admin/home/add/test">
+                    <StyledNavLink to="/admin/exam/add">
                         <span className="pl-3">
-                            Add Test
+                            Add Exam
                         </span>
                     </StyledNavLink>
                 </DropdownNav>

@@ -11,9 +11,9 @@ import ExamsPage from './pages/Main/Exams';
 import ProfilePage from './pages/Main/Profile';
 import PicturePage from './pages/Picture';
 import { connect } from 'react-redux';
-import AdminHomePage from './pages/Admin/Home';
 import AddCoursePage from './pages/Admin/AddCourse';
 import AllCoursesPage from './pages/Admin/AllCourses'
+import AddExamPage from './pages/Admin/AddExam'
 
 const userRoutes = [
     {
@@ -56,11 +56,6 @@ const mainAppRoutes = [
         component: <ProfilePage />
     },
     {
-        path: "/admin/home",
-        exact: true,
-        component: <AdminHomePage />
-    },
-    {
         path: "/admin/add/course",
         exact: true,
         component: <AddCoursePage />
@@ -70,6 +65,11 @@ const mainAppRoutes = [
         exact: true,
         component: <AllCoursesPage />
     },
+    {
+        path: "/admin/exam/add",
+        exact: true,
+        component: <AddExamPage />
+    }
 ]
 
 
