@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const HeaderContainer = styled(Jumbotron)`
     padding: 1.4rem;
-    border-radius: 0.5rem;
+    border-radius: 0.2rem;
     width: 100%;
 `;
 
