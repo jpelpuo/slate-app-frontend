@@ -36,9 +36,9 @@ const savePicture = payload => {
 }
 
 
-const setState = payload => {
+const setUserState = payload => {
     return {
-        type: actions.SET_STATE,
+        type: actions.SET_USER_STATE,
         payload
     }
 }
@@ -50,7 +50,7 @@ const logout = () => {
 }
 
 export {
-    setState,
+    setUserState,
     logout,
     userLogin,
     adminLogin,

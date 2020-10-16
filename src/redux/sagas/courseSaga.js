@@ -1,19 +1,21 @@
 import { takeEvery, put, all, call, delay } from 'redux-saga/effects';
 import actions from '../actionTypes';
-import { setCourses, setState } from '../actions/courseActions';
+import { setCourseState } from '../actions/courseActions';
+import { getUserInfo } from '../../services/user';
 import {
     addCourse as addNewCourse,
     getCourses as getAllCourses,
     deleteOneCourse,
     registerForCourse
 } from '../../services/course';
+import { setUserState } from '../actions/userActions';
 import { toast } from 'react-toastify';
 
 export function* addCourse({ payload: { courseName, subject, description } }) {
     try {
         const accessToken = sessionStorage.getItem('accessToken')
 
-        yield put(setState({
+        yield put(setCourseState({
             loading: true
         }))
 
@@ -23,27 +25,32 @@ export function* addCourse({ payload: { courseName, subject, description } }) {
             throw response.error;
         }
 
-        yield put(setState({
+        yield put(setCourseState({
             courseAdded: true,
             loading: false,
-            error: false,
-            errorMessage: ""
         }))
 
         toast("Course Added", {
             type: "success"
         })
 
-    } catch (error) {
-        yield put(setState({
-            errorOccurred: true,
-            errorMessage: error.message
+        yield delay(3000)
+
+        yield put(setCourseState({
+            courseAdded: false
         }))
+
+    } catch (error) {
+        toast(error.message, { type: "error" })
     }
 }
 
 export function* getCourses() {
     try {
+        yield put(setCourseState({
+            loading: true
+        }))
+
         const accessToken = sessionStorage.getItem('accessToken')
         const response = yield call(getAllCourses, accessToken);
 
@@ -51,11 +58,16 @@ export function* getCourses() {
             throw response.error;
         }
 
-        yield put(setCourses({
+        yield put(setCourseState({
+            loading: false,
             courses: [...response.courses]
         }))
 
     } catch (error) {
+        yield put(setCourseState({
+            loading: false
+        }))
+
         toast(error.message, {
             type: "error"
         })
@@ -64,6 +76,10 @@ export function* getCourses() {
 
 export function* deleteCourse({ payload: { courseId } }) {
     try {
+        yield put(setCourseState({
+            loading: true
+        }))
+
         const accessToken = sessionStorage.getItem('accessToken')
         const response = yield call(deleteOneCourse, courseId, accessToken);
 
@@ -71,8 +87,9 @@ export function* deleteCourse({ payload: { courseId } }) {
             throw response.error;
         }
 
-        yield put(setState({
-            courseDeleted: true
+        yield put(setCourseState({
+            courseDeleted: true,
+            loading: false
         }))
 
         toast("Course deleted", {
@@ -81,11 +98,15 @@ export function* deleteCourse({ payload: { courseId } }) {
 
         yield delay(3000)
 
-        yield put(setState({
+        yield put(setCourseState({
             courseDeleted: false
         }))
 
     } catch (error) {
+        yield put(setCourseState({
+            loading: false
+        }))
+
         toast(error.message, {
             type: "error"
         })
@@ -94,32 +115,45 @@ export function* deleteCourse({ payload: { courseId } }) {
 
 export function* registerCourse({ payload: { courseId } }) {
     try {
-        const accessToken = sessionStorage.getItem('accessToken')
-
-        yield put(setState({
-            loading: true
+        yield put(setCourseState({
+            loading: true,
+            courseToAdd: courseId
         }))
+
+        const accessToken = sessionStorage.getItem('accessToken')
 
         const response = yield call(registerForCourse, courseId, accessToken);
 
         if (response.status === 'failure') {
             throw response.status
         }
+        const email = sessionStorage.getItem('email');
 
-        // if (response.status === 'failure') {
-        //     toast("Could not add course", {
-        //         type: "error"
-        //     })
-        // }
+        const userInfoResponse = yield call(getUserInfo, email, accessToken);
 
-        yield put(setState({
-            loading: false
+        if (userInfoResponse.error) {
+            throw userInfoResponse.error
+        }
+
+        yield put(setUserState({
+            registeredCourses: [...userInfoResponse.userInfo.registeredCourses]
+        }))
+
+        sessionStorage.setItem('registeredCourses', JSON.stringify(userInfoResponse.userInfo.registeredCourses))
+
+        yield put(setCourseState({
+            loading: false,
+            courseToAdd: ""
         }))
 
         toast("Course registered", { type: "success" })
 
 
     } catch (error) {
+        yield put(setCourseState({
+            loading: false
+        }))
+
         toast(error, { type: "error" })
     }
 }

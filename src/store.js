@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router'
 import sagas from './redux/sagas';
-import { setState } from './redux/actions/userActions'
+import { setUserState } from './redux/actions/userActions'
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -27,7 +27,7 @@ const store = createStore(
 
 
 history.listen(() => {
-    store.dispatch(setState({
+    store.dispatch(setUserState({
         errorOccurred: false,
         errorMessage: ""
     }))

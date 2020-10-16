@@ -1,9 +1,9 @@
 import { takeEvery, put, all } from 'redux-saga/effects';
 import actions from '../actionTypes';
-import { setState } from '../actions/appActions';
+import { setAppState } from '../actions/appActions';
 
 export function* toggleNavigation({ payload }) {
-    yield put(setState({
+    yield put(setAppState({
         ...payload
     }))
 

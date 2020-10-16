@@ -10,14 +10,15 @@ const initialState = {
     image: "",
     imageSaved: false,
     userName: "",
-    registeredCourses: [] || sessionStorage.getItem('registeredCourses'),
-    email: ""
+    registeredCourses: JSON.parse(sessionStorage.getItem('registeredCourses')),
+    email: sessionStorage.getItem('email'),
+    loading: false
 }
 
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.SET_STATE:
+        case actions.SET_USER_STATE:
             return {
                 ...state,
                 ...action.payload

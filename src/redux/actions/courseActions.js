@@ -27,9 +27,9 @@ const setCourses = payload => {
     }
 }
 
-const setState = payload => {
+const setCourseState = payload => {
     return {
-        type: actions.SET_STATE,
+        type: actions.SET_COURSE_STATE,
         payload
     }
 }
@@ -46,6 +46,6 @@ export {
     registerCourse,
     setCourses,
     getCourses,
-    setState,
+    setCourseState,
     deleteCourse
 }

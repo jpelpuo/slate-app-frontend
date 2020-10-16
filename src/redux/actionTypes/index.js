@@ -10,7 +10,9 @@ const actions = {
     REGISTER: "user/REGISTER",
 
     // App actions
-    SET_STATE: "SET_STATE",
+    SET_USER_STATE: "user/SET_STATE",
+    SET_COURSE_STATE: "course/SET_STATE",
+    SET_APP_STATE:"app/SET_STATE",
     TOGGLE_NAV: "TOGGLE_NAV",
 
     // Course actions

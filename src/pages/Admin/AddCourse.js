@@ -80,7 +80,7 @@ const AddCoursePage = ({ loading, addCourse }) => {
 
 const select = state => {
     return {
-        loading: state.app.loading
+        loading: state.course.loading
     }
 }
 

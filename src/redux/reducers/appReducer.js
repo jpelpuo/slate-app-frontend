@@ -11,7 +11,7 @@ const initialState = {
 
 const appReducer = (state = initialState, action) => {
     switch(action.type){
-        case actions.SET_STATE:
+        case actions.SET_APP_STATE:
             return {
                 ...state, 
                 ...action.payload

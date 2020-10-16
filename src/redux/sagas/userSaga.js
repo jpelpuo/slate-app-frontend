@@ -1,6 +1,6 @@
 import { takeEvery, call, put, all, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setState } from '../actions/userActions';
+import { setUserState } from '../actions/userActions';
 import { login, registerUser, saveImage, getUserInfo } from '../../services/user';
 import { login as adminAuth } from '../../services/admin'
 import actions from '../actionTypes';
@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 // Admin Login Saga
 export function* adminLogin({ payload: { email, password } }) {
     try {
-        yield put(setState({
+        yield put(setUserState({
             loading: true
         }))
 
@@ -20,8 +20,7 @@ export function* adminLogin({ payload: { email, password } }) {
             throw response.error
         }
 
-
-        yield put(setState({
+        yield put(setUserState({
             loading: false,
             accessToken: response.adminAuth.accessToken,
             authenticated: true,
@@ -37,7 +36,7 @@ export function* adminLogin({ payload: { email, password } }) {
 
 
     } catch (error) {
-        yield put(setState({
+        yield put(setUserState({
             loading: false
         }))
 
@@ -50,7 +49,7 @@ export function* adminLogin({ payload: { email, password } }) {
 // User login Saga
 export function* userLogin({ payload: { email, password } }) {
     try {
-        yield put(setState({
+        yield put(setUserState({
             loading: true,
         }))
 
@@ -66,7 +65,7 @@ export function* userLogin({ payload: { email, password } }) {
             throw userInfoResponse.error
         }
 
-        yield put(setState({
+        yield put(setUserState({
             loading: false,
             accessToken: response.authData.accessToken,
             errorOccurred: false,
@@ -84,10 +83,11 @@ export function* userLogin({ payload: { email, password } }) {
         sessionStorage.setItem('role', 'user')
         sessionStorage.setItem('firstName', userInfoResponse.userInfo.firstName)
         sessionStorage.setItem('lastName', userInfoResponse.userInfo.lastName)
-        sessionStorage.setItem('registeredCourses', userInfoResponse.userInfo.registeredCourses)
+        sessionStorage.setItem('registeredCourses', JSON.stringify(userInfoResponse.userInfo.registeredCourses))
+        sessionStorage.setItem('email', email)
 
     } catch (error) {
-        yield put(setState({
+        yield put(setUserState({
             loading: false
         }))
 
@@ -100,7 +100,7 @@ export function* userLogin({ payload: { email, password } }) {
 // Register Saga
 export function* register({ payload: { firstName, lastName, gender, college, mobile, email, password } }) {
     try {
-        yield put(setState({
+        yield put(setUserState({
             loading: true,
         }))
 
@@ -111,7 +111,7 @@ export function* register({ payload: { firstName, lastName, gender, college, mob
             throw response.error
         }
 
-        yield put(setState({
+        yield put(setUserState({
             loading: false,
             errorOccurred: false,
             errorMessage: "",
@@ -121,7 +121,7 @@ export function* register({ payload: { firstName, lastName, gender, college, mob
         yield put(push('/user/picture'))
 
     } catch (error) {
-        yield put(setState({
+        yield put(setUserState({
             loading: false
         }))
 
@@ -132,14 +132,14 @@ export function* register({ payload: { firstName, lastName, gender, college, mob
 }
 
 export function* takePicture({ payload }) {
-    yield put(setState({
+    yield put(setUserState({
         image: payload
     }))
 }
 
 export function* savePicture({ payload: { imageBase64, userName } }) {
     try {
-        yield put(setState({
+        yield put(setUserState({
             loading: true,
         }))
 
@@ -149,7 +149,7 @@ export function* savePicture({ payload: { imageBase64, userName } }) {
             throw response.error
         }
 
-        yield put(setState({
+        yield put(setUserState({
             loading: false,
         }))
 
@@ -162,7 +162,7 @@ export function* savePicture({ payload: { imageBase64, userName } }) {
         yield put(push('/auth'))
 
     } catch (error) {
-        yield put(setState({
+        yield put(setUserState({
             loading: false,
         }))
 
@@ -173,7 +173,7 @@ export function* savePicture({ payload: { imageBase64, userName } }) {
 }
 
 export function* logout() {
-    yield put(setState({
+    yield put(setUserState({
         authenticated: false,
         accessToken: "",
         loading: false,
@@ -188,6 +188,7 @@ export function* logout() {
     sessionStorage.setItem('authenticated', false);
     sessionStorage.setItem('navButtonClicked', false)
     sessionStorage.setItem('navId', '')
+    sessionStorage.setItem('email', '')
 
     yield put(push('/auth'))
 }

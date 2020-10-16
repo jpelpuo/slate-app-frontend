@@ -7,14 +7,14 @@ const toggleNav = (payload) => {
     }
 }
 
-const setState = payload => {
+const setAppState = payload => {
     return {
-        type: actions.SET_STATE,
+        type: actions.SET_APP_STATE,
         payload
     }
 }
 
 export {
     toggleNav,
-    setState
+    setAppState
 }

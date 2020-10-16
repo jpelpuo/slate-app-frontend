@@ -204,7 +204,7 @@ const select = state => {
     return {
         errorOccurred: state.app.errorOccurred,
         errorMessage: state.app.errorMessage,
-        loading: state.app.loading
+        loading: state.user.loading
     }
 }
 
