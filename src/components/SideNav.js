@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleNav } from '../redux/actions/appActions';
-import { FaHome, FaGraduationCap, FaEdit, FaCaretDown } from 'react-icons/fa';
+import { FaGraduationCap, FaEdit, FaCaretDown } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 const SideNavContainer = styled.div`
