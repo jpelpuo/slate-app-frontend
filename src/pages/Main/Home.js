@@ -6,7 +6,7 @@ import RegisteredCourseCard from '../../components/RegisteredCourseCard';
 import Subtitle from '../../components/Subtitle';
 import Header from '../../components/Header';
 import { FaGraduationCap } from 'react-icons/fa';
-import { Row, Col, Spinner } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 const HomePageContainer = styled.div`
     display: flex;
