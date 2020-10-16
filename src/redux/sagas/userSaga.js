@@ -29,7 +29,7 @@ export function* adminLogin({ payload: { email, password } }) {
             role: "admin"
         }))
 
-        yield put(push('/admin/home'))
+        yield put(push('/admin/courses'))
         sessionStorage.setItem('accessToken', response.adminAuth.accessToken)
         sessionStorage.setItem('authenticated', true)
         sessionStorage.setItem('role', 'admin')
