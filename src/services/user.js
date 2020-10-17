@@ -2,7 +2,7 @@
 
 const url = 'https://intense-badlands-44228.herokuapp.com/api/user';
 
-export const login = async (email, password) => {
+export const login = async ({ email, password }) => {
     try {
         const response = await fetch(`${url}/auth`,
             {
@@ -21,7 +21,7 @@ export const login = async (email, password) => {
     }
 }
 
-export const registerUser = async (firstName, lastName, gender, college, mobile, email, password) => {
+export const registerUser = async ({ firstName, lastName, gender, college, mobile, email, password }) => {
     try {
         const response = await fetch(`${url}/register`,
             {
@@ -46,7 +46,7 @@ export const registerUser = async (firstName, lastName, gender, college, mobile,
     }
 }
 
-export const saveImage = async (imageBase64, userName) => {
+export const saveImage = async ({ imageBase64, userName }) => {
     try {
 
         const response = await fetch(`${url}/savepicture`,
@@ -67,7 +67,7 @@ export const saveImage = async (imageBase64, userName) => {
     }
 }
 
-export const getUserInfo = async (email, accessToken) => {
+export const getUser = async (email, accessToken) => {
     try {
         const response = await fetch(`${url}/${email}`, {
             method: 'GET',

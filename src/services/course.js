@@ -1,6 +1,6 @@
 const url = 'https://intense-badlands-44228.herokuapp.com/api/course';
 
-export const addCourse = async (courseName, subject, description, accessToken) => {
+export const addCourse = async ({ courseName, subject, description }, accessToken) => {
     try {
         const response = await fetch(`${url}/add`, {
             method: 'POST',

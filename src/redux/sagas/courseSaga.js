@@ -1,7 +1,7 @@
 import { takeEvery, put, all, call, delay } from 'redux-saga/effects';
 import actions from '../actionTypes';
 import { setCourseState } from '../actions/courseActions';
-import { getUserInfo } from '../../services/user';
+import { getUser } from '../../services/user';
 import {
     addCourse as addNewCourse,
     getCourses as getAllCourses,
@@ -11,7 +11,7 @@ import {
 import { setUserState } from '../actions/userActions';
 import { toast } from 'react-toastify';
 
-export function* addCourse({ payload: { courseName, subject, description } }) {
+export function* addCourse(action) {
     try {
         const accessToken = sessionStorage.getItem('accessToken')
 
@@ -19,7 +19,7 @@ export function* addCourse({ payload: { courseName, subject, description } }) {
             loading: true
         }))
 
-        const response = yield call(addNewCourse, courseName, subject, description, accessToken);
+        const response = yield call(addNewCourse, action.payload, accessToken);
 
         if (response.error) {
             throw response.error;
@@ -129,7 +129,7 @@ export function* registerCourse({ payload: { courseId } }) {
         }
         const email = sessionStorage.getItem('email');
 
-        const userInfoResponse = yield call(getUserInfo, email, accessToken);
+        const userInfoResponse = yield call(getUser, email, accessToken);
 
         if (userInfoResponse.error) {
             throw userInfoResponse.error

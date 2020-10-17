@@ -55,11 +55,23 @@ const Description = styled.div`
 
 
 const CourseCard = ({ course, registerCourse, loading, courseToAdd, registeredCourses }) => {
-
     const handleRegister = courseId => {
         registerCourse({
             courseId
         })
+    }
+
+
+    const isRegistered = (courses, courseId) => {
+        const registered = courses.filter(course => {
+            return course._id === courseId
+        })
+
+        if (registered.length === 0) {
+            return false
+        }
+
+        return true;
     }
 
     return (
@@ -81,15 +93,15 @@ const CourseCard = ({ course, registerCourse, loading, courseToAdd, registeredCo
                 <Actions className="">
                     <RegisterButton
                         className="mr-2"
-                        variant={`${registeredCourses.includes(course._id) ? "success" : "primary"}`}
+                        variant={`${isRegistered(registeredCourses, course._id) ? "success" : "primary"}`}
                         onClick={() => handleRegister(course._id)}
-                        disabled={registeredCourses.includes(course._id) ? true : false}
+                        disabled={isRegistered(registeredCourses, course._id) ? true : false}
                     >
                         {loading && courseToAdd === course._id
                             ? <Spinner animation="border" size="sm" />
                             : ""}
                         {
-                            registeredCourses.includes(course._id)
+                            isRegistered(registeredCourses, course._id)
                                 ?
                                 "Registered"
                                 : "Register"

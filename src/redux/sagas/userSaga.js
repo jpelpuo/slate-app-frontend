@@ -1,20 +1,20 @@
 import { takeEvery, call, put, all, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { setUserState } from '../actions/userActions';
-import { login, registerUser, saveImage, getUserInfo } from '../../services/user';
+import { login, registerUser, saveImage, getUser } from '../../services/user';
 import { login as adminAuth } from '../../services/admin'
 import actions from '../actionTypes';
 import { toast } from 'react-toastify'
 
 
 // Admin Login Saga
-export function* adminLogin({ payload: { email, password } }) {
+export function* adminLogin(action) {
     try {
         yield put(setUserState({
             loading: true
         }))
 
-        const response = yield call(adminAuth, email, password);
+        const response = yield call(adminAuth, action.payload);
 
         if (response.error) {
             throw response.error
@@ -47,19 +47,19 @@ export function* adminLogin({ payload: { email, password } }) {
 }
 
 // User login Saga
-export function* userLogin({ payload: { email, password } }) {
+export function* userLogin(action) {
     try {
         yield put(setUserState({
             loading: true,
         }))
 
-        const response = yield call(login, email, password);
+        const response = yield call(login, action.payload);
 
         if (response.error) {
             throw response.error
         }
 
-        const userInfoResponse = yield call(getUserInfo, email, response.authData.accessToken);
+        const userInfoResponse = yield call(getUser, action.payload.email, response.authData.accessToken);
 
         if (userInfoResponse.error) {
             throw userInfoResponse.error
@@ -84,7 +84,7 @@ export function* userLogin({ payload: { email, password } }) {
         sessionStorage.setItem('firstName', userInfoResponse.userInfo.firstName)
         sessionStorage.setItem('lastName', userInfoResponse.userInfo.lastName)
         sessionStorage.setItem('registeredCourses', JSON.stringify(userInfoResponse.userInfo.registeredCourses))
-        sessionStorage.setItem('email', email)
+        sessionStorage.setItem('email', action.payload.email)
 
     } catch (error) {
         yield put(setUserState({
@@ -98,14 +98,13 @@ export function* userLogin({ payload: { email, password } }) {
 }
 
 // Register Saga
-export function* register({ payload: { firstName, lastName, gender, college, mobile, email, password } }) {
+export function* register(action) {
     try {
         yield put(setUserState({
             loading: true,
         }))
 
-        const response = yield call(registerUser, firstName, lastName, gender, college,
-            mobile, email, password);
+        const response = yield call(registerUser, action.payload);
 
         if (response.error) {
             throw response.error
@@ -116,7 +115,7 @@ export function* register({ payload: { firstName, lastName, gender, college, mob
             errorOccurred: false,
             errorMessage: "",
             registrationSuccess: true,
-            userName: `${firstName} ${lastName} ${email}`
+            userName: `${action.payload.firstName} ${action.payload.lastName} ${action.payload.email}`
         }))
         yield put(push('/user/picture'))
 
@@ -137,13 +136,13 @@ export function* takePicture({ payload }) {
     }))
 }
 
-export function* savePicture({ payload: { imageBase64, userName } }) {
+export function* savePicture(action) {
     try {
         yield put(setUserState({
             loading: true,
         }))
 
-        const response = yield call(saveImage, imageBase64, userName);
+        const response = yield call(saveImage, action.payload);
 
         if (response.error) {
             throw response.error
