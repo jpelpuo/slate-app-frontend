@@ -6,7 +6,8 @@ import {
     addCourse as addNewCourse,
     getCourses as getAllCourses,
     deleteOneCourse,
-    registerForCourse
+    registerForCourse,
+    unregisterCourse
 } from '../../services/course';
 import { setUserState } from '../actions/userActions';
 import { toast } from 'react-toastify';
@@ -158,11 +159,57 @@ export function* registerCourse({ payload: { courseId } }) {
     }
 }
 
+export function* unregister({ payload: { courseId } }) {
+    try {
+        yield put(setCourseState({
+            loading: true,
+            courseToRemove: courseId
+        }))
+
+        const accessToken = sessionStorage.getItem('accessToken')
+
+        const response = yield call(unregisterCourse, courseId, accessToken);
+
+        if (response.status === 'failure') {
+            throw response.status
+        }
+
+        const email = sessionStorage.getItem('email');
+
+        const userInfoResponse = yield call(getUser, email, accessToken);
+
+        if (userInfoResponse.error) {
+            throw userInfoResponse.error
+        }
+
+        yield put(setUserState({
+            registeredCourses: [...userInfoResponse.userInfo.registeredCourses]
+        }))
+
+        sessionStorage.setItem('registeredCourses', JSON.stringify(userInfoResponse.userInfo.registeredCourses))
+
+        yield put(setCourseState({
+            loading: false,
+            courseToRemove: ""
+        }))
+
+        toast("Course removed", { type: "success" })
+
+    } catch (error) {
+        yield put(setCourseState({
+            loading: false
+        }))
+
+        toast(error, { type: "error" })
+    }
+}
+
 export default function* rootSaga() {
     yield all([
         takeEvery(actions.ADD_COURSE, addCourse),
         takeEvery(actions.GET_COURSES, getCourses),
         takeEvery(actions.DELETE_COURSE, deleteCourse),
-        takeEvery(actions.REGISTER_COURSE, registerCourse)
+        takeEvery(actions.REGISTER_COURSE, registerCourse),
+        takeEvery(actions.UNREGISTER_COURSE, unregister)
     ])
 }

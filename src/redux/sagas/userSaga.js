@@ -117,6 +117,7 @@ export function* register(action) {
             registrationSuccess: true,
             userName: `${action.payload.firstName} ${action.payload.lastName} ${action.payload.email}`
         }))
+        
         yield put(push('/user/picture'))
 
     } catch (error) {
@@ -188,6 +189,9 @@ export function* logout() {
     sessionStorage.setItem('navButtonClicked', false)
     sessionStorage.setItem('navId', '')
     sessionStorage.setItem('email', '')
+    sessionStorage.setItem('registeredCourses', '')
+    sessionStorage.setItem('firstName', '')
+    sessionStorage.setItem('lastName', '')
 
     yield put(push('/auth'))
 }

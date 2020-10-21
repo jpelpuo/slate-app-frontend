@@ -103,8 +103,8 @@ const CourseCard = ({ course, registerCourse, loading, courseToAdd, registeredCo
                         {
                             isRegistered(registeredCourses, course._id)
                                 ?
-                                "Registered"
-                                : "Register"
+                                " Registered"
+                                : " Register"
 
                         }
                     </RegisterButton>

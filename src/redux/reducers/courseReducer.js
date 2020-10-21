@@ -5,7 +5,8 @@ const initialState = {
     courses: [],
     courseDeleted: false,
     loading: false,
-    courseToAdd: ""
+    courseToAdd: "",
+    courseToRemove:""
 }
 
 const courseReducer = (state = initialState, action) => {

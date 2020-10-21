@@ -67,3 +67,19 @@ export const registerForCourse = async (courseId, accessToken) => {
         throw error
     }
 }
+
+export const unregisterCourse = async (courseId, accessToken) => {
+    try {
+        const response = await fetch(`${url}/unregister/${courseId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+
+        return await response.json();
+    } catch (error) {
+        throw error
+    }
+}

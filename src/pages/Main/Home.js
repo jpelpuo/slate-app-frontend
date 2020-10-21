@@ -7,6 +7,7 @@ import Subtitle from '../../components/Subtitle';
 import Header from '../../components/Header';
 import { FaGraduationCap } from 'react-icons/fa';
 import { Row, Col } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
 
 const HomePageContainer = styled.div`
     display: flex;
@@ -46,6 +47,16 @@ const HomePage = ({ registeredCourses }) => {
             {
                 renderRows(registeredCourses)
             }
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         </HomePageContainer>
     );
 }

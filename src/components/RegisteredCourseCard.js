@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Spinner } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { unregisterCourse } from '../redux/actions/courseActions';
 
 const StyledCard = styled(Card)`
     margin-bottom: 1rem;
@@ -31,7 +33,13 @@ const Actions = styled.div`
     justify-content: flex-start;
 `;
 
-const RegisteredCourseCard = ({ course }) => {
+const RegisteredCourseCard = ({ course, loading, courseToRemove, registeredCourses, unregisterCourse }) => {
+
+    const handleUnregister = (courseId) => {
+        unregisterCourse({
+            courseId
+        })
+    }
     return (
         <StyledCard className="bg-dark">
             <Card.Body>
@@ -41,8 +49,18 @@ const RegisteredCourseCard = ({ course }) => {
                     </CourseNameText>
                 </CourseName>
                 <Actions>
-                    <UnregisterButton variant="danger" className="mr-2">
-                        Unregister
+                    <UnregisterButton
+                        variant="danger"
+                        className="mr-2"
+                        onClick={() => handleUnregister(course._id)}
+                    >
+                        {
+                            loading && courseToRemove === course._id
+                                ? <>
+                                    <Spinner animation="border" size="sm" /> Removing
+                                </>
+                                : "Unregister"
+                        }
                     </UnregisterButton>
                     <MoreButton>
                         More
@@ -53,8 +71,19 @@ const RegisteredCourseCard = ({ course }) => {
     );
 }
 
-RegisteredCourseCard.propTypes = {
-    course: PropTypes.object.isRequired
+const select = state => {
+    return {
+        loading: state.course.loading,
+        courseToRemove: state.course.courseToRemove,
+        registeredCourses: state.user.registeredCourses
+    }
 }
 
-export default RegisteredCourseCard;
+RegisteredCourseCard.propTypes = {
+    course: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    registeredCourses: PropTypes.array.isRequired,
+    courseToRemove: PropTypes.string.isRequired
+}
+
+export default connect(select, { unregisterCourse })(RegisteredCourseCard);
