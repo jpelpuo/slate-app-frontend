@@ -129,8 +129,8 @@ const select = state => {
 NavBar.propTypes = {
     logout: PropTypes.func.isRequired,
     role: PropTypes.string.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired
+    firstName: PropTypes.string,
+    lastName: PropTypes.string
 }
 
 export default connect(select, { logout })(NavBar);

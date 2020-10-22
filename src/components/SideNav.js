@@ -167,7 +167,7 @@ const select = state => {
 
 SideNav.propTypes = {
     navButtonClicked: PropTypes.bool.isRequired,
-    navId: PropTypes.string.isRequired,
+    navId: PropTypes.string,
     navOpen: PropTypes.bool.isRequired,
     toggleNav: PropTypes.func.isRequired
 }

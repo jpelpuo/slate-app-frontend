@@ -73,19 +73,19 @@ const mainAppRoutes = [
 ]
 
 
-const Router = ({ history, accessToken }) => {
+const Router = ({ history, accessToken, role }) => {
     return (
         <ConnectedRouter history={history}>
             <Switch>
                 <Redirect exact path="/" to="/auth" />
                 {
-                    accessToken && <Redirect path="/auth" to="/user/home" />
+                    (accessToken && role === 'user') && <Redirect path="/auth" to="/user/home" />
+                }
+                {
+                    (accessToken && role === 'admin') && <Redirect path="/auth" to="/admin/courses" />
                 }
                 {
                     accessToken && <Redirect path="/register" to="/user/home" />
-                }
-                {
-                    accessToken && <Redirect path="/picture" to="/user/home" />
                 }
                 {
 
@@ -125,7 +125,8 @@ const Router = ({ history, accessToken }) => {
 
 const select = state => {
     return {
-        accessToken: state.user.accessToken
+        accessToken: state.user.accessToken,
+        role: state.user.role
     }
 }
 
