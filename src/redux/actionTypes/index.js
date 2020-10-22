@@ -21,7 +21,11 @@ const actions = {
     GET_COURSES: "GET_COURSES",
     SET_COURSES: "admin/SET_COURSES",
     DELETE_COURSE: "admin/DELETE_COURSE",
-    UNREGISTER_COURSE: "user/UNREGISTER_COURSE"
+    UNREGISTER_COURSE: "user/UNREGISTER_COURSE",
+
+    // Exam Actions
+    ADD_EXAM: "admin/ADD_EXAM",
+    SET_EXAM_STATE: "exam/SET_STATE"
 }
 
 

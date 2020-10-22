@@ -189,7 +189,7 @@ export function* logout() {
     sessionStorage.setItem('navButtonClicked', false)
     sessionStorage.setItem('navId', '')
     sessionStorage.setItem('email', '')
-    sessionStorage.setItem('registeredCourses', '')
+    sessionStorage.setItem('registeredCourses', [])
     sessionStorage.setItem('firstName', '')
     sessionStorage.setItem('lastName', '')
 

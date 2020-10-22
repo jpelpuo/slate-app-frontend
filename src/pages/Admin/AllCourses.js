@@ -80,7 +80,7 @@ const AllCoursesPage = ({ courses, getCourses, courseDeleted, deleteCourse }) =>
         },
         {
             name: 'Registered Users',
-            selector: ''
+            selector: 'registeredUsers'
         },
         {
             name: 'Actions',
