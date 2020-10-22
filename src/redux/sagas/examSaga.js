@@ -1,4 +1,4 @@
-import { takeEvery, put, all, call, delay } from 'redux-saga/effects'
+import { takeEvery, put, all, call} from 'redux-saga/effects'
 import actions from '../actionTypes'
 import { setExamState } from '../actions/examActions'
 import { toast } from 'react-toastify'
