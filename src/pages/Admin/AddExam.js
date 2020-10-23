@@ -67,7 +67,7 @@ const AddExamPage = ({ addExam, loading }) => {
         const questionsAndAnswers = questionsToUpdate;
         const newState = questionsAndAnswers.map((question) => {
             if (question.questionId === event.target.name) {
-                question.question = event.target.value.trim()
+                question.question = event.target.value
             }
             return question
         })
@@ -82,7 +82,7 @@ const AddExamPage = ({ addExam, loading }) => {
                 question.answerIds.forEach(answerId => {
                     const isAnswerId = event.target.name.includes(answerId)
                     if (isAnswerId) {
-                        question.answers[question.answerIds.indexOf(answerId)] = event.target.value.trim()
+                        question.answers[question.answerIds.indexOf(answerId)] = event.target.value
                         return
                     }
                 })
@@ -97,7 +97,7 @@ const AddExamPage = ({ addExam, loading }) => {
         const newState = questionsAndAnswers.map(question => {
             const isQuestionId = event.target.name.includes(question.questionId)
             if (isQuestionId) {
-                question.correctAnswer = event.target.value.trim()
+                question.correctAnswer = event.target.value
             }
             return question;
         })
