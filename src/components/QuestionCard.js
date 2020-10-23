@@ -31,7 +31,7 @@ const QuestionCard = ({ question }) => {
                     question.answers.map((answer, index) => {
                         return (
                             <FormGroup key={index}>
-                                <StyledRadio type="radio" label={answer} />
+                                <StyledRadio name={`${question.question}-options`} type="radio" label={answer} />
                             </FormGroup>)
                     })
                 }
