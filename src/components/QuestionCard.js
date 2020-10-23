@@ -7,15 +7,25 @@ import PropTypes from 'prop-types'
 
 const QuestionCardContainer = styled(Card)`
     display: flex;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    margin-bottom: 1rem;
 `;
 
-const QuestionName = styled.div``;
+const QuestionName = styled.div`
+    display: flex;
+    justify-content: flex-start;
+`;
 const StyledRadio = styled(FormCheck)``;
 const OptionsList = styled.div`
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
+`;
+
+const Actions = styled.div`
+    display: flex;
     justify-content: flex-start;
 `;
 
@@ -26,16 +36,21 @@ const QuestionCard = ({ question }) => {
                 {question.question}
             </QuestionName>
             <OptionsList>
-                <h4>Options</h4>
+                <h4 className="text-left">Options</h4>
                 {
                     question.answers.map((answer, index) => {
                         return (
-                            <FormGroup key={index}>
+                            <FormGroup key={index} style={{ display: "flex", justifyContent: "flex-start" }}>
                                 <StyledRadio name={`${question.question}-options`} type="radio" label={answer} />
                             </FormGroup>)
                     })
                 }
             </OptionsList>
+            {/* <Actions>
+                <Button>
+                    Next
+                </Button>
+            </Actions> */}
         </QuestionCardContainer>
     );
 }
