@@ -25,13 +25,13 @@ const TakeExamPage = ({ examToTake }) => {
             <Header headerText="Take Exam" icon={<FaEdit />} />
             <Subtitle text="You're currently taking an exam" className="mb-2" />
             <ExamName>
-                <span className="fint-weight-bolder">Exam Name </span>{examToTake.name}
+                <span className="fint-weight-bolder">Exam Name </span>{examToTake[0].name}
             </ExamName>
             <TimeAllocation>
-                {examToTake.duration}
+                {examToTake[0].duration}
             </TimeAllocation>
             {
-                examToTake.questions.map((question, index) => {
+                examToTake[0].questions.map((question, index) => {
                     return (
                         <QuestionCard question={question} key={index} />
                     )
@@ -48,7 +48,7 @@ const select = state => {
 }
 
 TakeExamPage.propTypes = {
-    examToTake: PropTypes.object.isRequired
+    examToTake: PropTypes.array.isRequired
 }
 
 export default connect(select, null)(TakeExamPage);
