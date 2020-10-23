@@ -11,6 +11,7 @@ const QuestionCardContainer = styled(Card)`
     justify-content: flex-start;
     padding: 2rem;
     margin-bottom: 1rem;
+    color: white;
 `;
 
 const QuestionName = styled.div`
@@ -31,7 +32,7 @@ const Actions = styled.div`
 
 const QuestionCard = ({ question }) => {
     return (
-        <QuestionCardContainer>
+        <QuestionCardContainer className="bg-dark">
             <QuestionName>
                 {question.question}
             </QuestionName>
