@@ -25,7 +25,9 @@ const actions = {
 
     // Exam Actions
     ADD_EXAM: "admin/ADD_EXAM",
-    SET_EXAM_STATE: "exam/SET_STATE"
+    SET_EXAM_STATE: "exam/SET_STATE",
+    GET_EXAMS: "exam/GET_EXAMS",
+    TAKE_EXAM: "user/TAKE_EXAM"
 }
 
 

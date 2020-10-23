@@ -19,3 +19,19 @@ export const addNewExam = async ({ name, duration, questions }, accessToken) => 
         throw error
     }
 }
+
+export const getAllExams = async (accessToken) => {
+    try {
+        const response = await fetch(`${url}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+
+        return await response.json();
+    } catch (error) {
+        throw error
+    }
+}

@@ -7,6 +7,19 @@ const addExam = payload => {
     }
 }
 
+const getExams = () => {
+    return {
+        type: actions.GET_EXAMS
+    }
+}
+
+const takeExam = payload => {
+    return {
+        type: actions.TAKE_EXAM,
+        payload
+    }
+}
+
 const setExamState = payload => {
     return {
         type: actions.SET_EXAM_STATE,
@@ -16,5 +29,7 @@ const setExamState = payload => {
 
 export {
     addExam,
-    setExamState
+    setExamState,
+    getExams,
+    takeExam
 }

@@ -6,7 +6,9 @@ const initialState = {
     examDeleted: false,
     loading: false,
     examToAdd: "",
-    examToRemove: ""
+    examToRemove: "",
+    examBeingTakenId: sessionStorage.getItem('examBeingTakenId'),
+    examToTake: JSON.parse(sessionStorage.getItem('examToTake'))[0]
 }
 
 const examReducer = (state = initialState, action) => {

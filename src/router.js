@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import AddCoursePage from './pages/Admin/AddCourse';
 import AllCoursesPage from './pages/Admin/AllCourses'
 import AddExamPage from './pages/Admin/AddExam'
+import TakeExamPage from './pages/Main/TakeExam'
 
 const userRoutes = [
     {
@@ -49,6 +50,11 @@ const mainAppRoutes = [
         path: "/user/exams",
         exact: true,
         component: <ExamsPage />
+    },
+    {
+        path: "/user/exam/:examId",
+        exact: true,
+        component: <TakeExamPage />
     },
     {
         path: "/user/profile",
