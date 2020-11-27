@@ -25,10 +25,10 @@ const OptionsList = styled.div`
     flex-direction: column;
 `;
 
-const Actions = styled.div`
-    display: flex;
-    justify-content: flex-start;
-`;
+// const Actions = styled.div`
+//     display: flex;
+//     justify-content: flex-start;
+// `;
 
 const QuestionCard = ({ question }) => {
     return (
